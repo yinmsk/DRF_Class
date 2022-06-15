@@ -6,7 +6,10 @@
  5. django에서 queryset과 object는 어떻게 다른지 서술하기
 <br/>
 ## args, kwargs를 사용하는 예제 코드 짜보기
-
+```python
+def doit(*args):
+for i in name
+```
 
 
 ## mutable과 immutable은 어떤 특성이 있고, 어떤 자료형이 어디에 해당하는지 서술하기

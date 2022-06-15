@@ -6,7 +6,8 @@
  5. django에서 queryset과 object는 어떻게 다른지 서술하기
 <br/>
 ## args, kwargs를 사용하는 예제 코드 짜보기
-```python
+
+```python3
 def doit(*args):
 for i in name
 ```

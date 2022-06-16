@@ -61,12 +61,14 @@ name_age(name="홍길동", age="100")
 
 ### mutable
 `mutable`은 값이 변할 수 있다. - 데이터만 바뀐다
+
 종류: int, float string, tuple 
 예를들어 데이터를 변경하려 한다면 원래 사용하던 데이터 주소안에 데이터를 넣을 수 있다.
 <br/>
 
 ### immutable
 `immutable`은 값이 변할 수 없다. - 주소 데이터 다 바꾸어야함
+
 종류: list, dictionar
 예를들면 데이터를 변경하려 한다면 이전 데이터 주소 지우고 새로운 주소를 만들고 데이터를 넣어주어야 한다.
 <br/>

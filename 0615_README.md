@@ -40,6 +40,7 @@ add(10)
 10
 ```
 <br/>
+
 ## kwargs 뜻
 	keyword = 특정값의 형태로 함수 안에 작성
 	kwargs는 dictionary의 형태로 전달됨

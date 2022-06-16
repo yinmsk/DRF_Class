@@ -58,11 +58,11 @@ name_age(name="홍길동", age="100")
 
 ## mutable과 immutable은 어떤 특성이 있고, 어떤 자료형이 어디에 해당하는지 서술하기
 ### mutable
-'mutable'은 값이 변할 수 있다
+`mutable`은 값이 변할 수 있다
 예시) int, float string, tuple 
 
 ### immutable
-'immutable'은 값이 변할 수 없다
+`immutable`은 값이 변할 수 없다
 
 
 

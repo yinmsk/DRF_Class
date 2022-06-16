@@ -10,7 +10,6 @@
 ## args 뜻
 	복수의 인자를 함수로 받고자 할 때 사용
 	args의 타입은 tuple
-args를 사용하는 예제 코드 짜보기
 
 예제 1
 ```python3
@@ -44,7 +43,6 @@ add(10)
 ## kwargs 뜻
 	keyword = 특정값의 형태로 함수 안에 작성
 	kwargs는 dictionary의 형태로 전달됨
-kwargs를 사용하는 예제 코드 짜보기
 
 ```python3
 def name_age(**kwargs):

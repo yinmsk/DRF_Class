@@ -130,8 +130,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'user.User'
 
+
+# 없으면 디폴트 값이 사용된다.
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [  # 기본적인 view 접근 권한 지정
+        # AllowAny, IsAdminUser, IsAuthenticated 중 선택 가능
         'rest_framework.permissions.AllowAny'
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [  # session 혹은 token을 인증 할 클래스 설정

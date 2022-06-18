@@ -8,6 +8,9 @@ from django.contrib.auth import login, logout, authenticate
 
 class UserView(APIView):
     permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]  # 누구나 view 조회 가능
+    # permission_classes = [permissions.IsAdminUser] # admin만 view 조회 가능
+    # permission_classes = [permissions.IsAuthenticated] # 로그인 된 사용자만 view 조회 가능
 
     # 사용자 정보 조회
     def get(self, request):
@@ -25,6 +28,7 @@ class UserView(APIView):
     def delete(self, request):
         return Response({"message": "delete method!!"})
 
+
 class UserAPIView(APIView):
     # 로그인
     def post(self, request):
@@ -38,7 +42,7 @@ class UserAPIView(APIView):
 
         login(request, user)
         return Response({"message": "login success!!"})
-    
+
     def delete(self, request):
         logout(request)
         return Response({"message": "logout success!!"})

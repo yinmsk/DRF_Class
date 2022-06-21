@@ -1,9 +1,12 @@
 from django.shortcuts import render
+# from itsdangerous import Serializer
 from rest_framework.views import APIView
-from rest_framework import permissions
+from rest_framework import permissions, status
 from rest_framework.response import Response
 # 로그인 기능 구현 authenticate
 from django.contrib.auth import login, logout, authenticate
+
+from user.serializers import UserSerializer, UserSignupSeralizer
 
 
 class UserView(APIView):
@@ -13,11 +16,20 @@ class UserView(APIView):
 
     # 사용자 정보 조회
     def get(self, request):
-        return Response({"message": "get method"})
+        return Response(UserSerializer(request.user).data, status.HTTP_200_OK)
 
     # 회원가입
     def post(self, request):
-        return Response({"message": "post method!!"})
+        Serializer = UserSignupSeralizer(data=request.data)
+        # request.data 해서 가져온 데이터가 유효한지 빠진 값이 없는지 검증해준다.
+        if serializer.is_valid():
+            # 인스턴스를 저장해준다.
+            serializer.save()
+            return Response({"message": "가입 완료"})
+        else:
+            # 인스턴스를 저장해준다.
+            print(serializer.errors)
+            return Response({"message": "가입 실패"})
 
     # 회원 정보 수정
     def put(self, request):
@@ -31,6 +43,7 @@ class UserView(APIView):
 class UserAPIView(APIView):
     # 로그인
     def post(self, request):
+        # json 형식으로 데이터를 주고 받을 때는 data를 사용한다.
         username = request.data.get('username', '')
         password = request.data.get('password', '')
 

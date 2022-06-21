@@ -1,8 +1,7 @@
-from telnetlib import STATUS  # ????????
 from unicodedata import category
 from django.shortcuts import render
 from rest_framework.views import APIView
-from rest_framework import permissions
+from rest_framework import permissions, status
 from rest_framework.response import Response
 from blog.models import Article as ArticleModel
 from ai.permissions import RegisteredMoreThanThreeDaysUser

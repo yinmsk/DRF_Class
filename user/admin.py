@@ -7,6 +7,8 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 class UserProfileInline(admin.StackedInline):
     model = UserProfileModel
+    # admin 페이지를 꾸밀 수 있는 기능중 하나? hobby를 꾸며주었다.
+    filter_horizontal = ['hobby']
 
 
 # UserAdmin 등록 방법은 장고 공식문서에 나와있다.
@@ -24,6 +26,13 @@ class UserAdmin(BaseUserAdmin):
     # UserAdmin 아래에 UserProfileInline을 붙여준다.
     inlines = (
         UserProfileInline,
+    )
+
+    add_fieldsets = (
+        (None, {
+            'classes': ('wide',),
+            'fields': ('email', 'fullname', 'password1', 'password2')}
+         ),
     )
 
     filter_horizontal = []

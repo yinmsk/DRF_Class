@@ -1,10 +1,15 @@
 from unicodedata import category
 from django.shortcuts import render
+from itsdangerous import Serializer
 from rest_framework.views import APIView
 from rest_framework import permissions, status
 from rest_framework.response import Response
 from blog.models import Article as ArticleModel
 from ai.permissions import RegisteredMoreThanThreeDaysUser
+
+from blog.serializers import ArticleSerializer
+
+from django.utils import timezone
 
 # 임포트 status
 
@@ -15,22 +20,33 @@ class ArticleView(APIView):
 
     def get(self, request):
         user = request.user
+        today = timezone.now()
+        articles = ArticleModel.objects.filter(
+            exposure_start_date__lte=today,
+            exposure_end_date__gte=today,
+        ).order_by("-id")
 
-        articles = ArticleModel.objects.filter(user=user)
-        titles = [article.title for article in articles]  # list 축약 문법
+        serializer = ArticleSerializer(articles, many=True).data
 
-        titles = []
+        return Response(serializer, status=status.HTTP_200_OK)
 
-        for article in articles:
-            titles.append(article.title)
+        # articles = ArticleModel.objects.filter(user=user)
+        # titles = [article.title for article in articles]  # list 축약 문법
 
-        return Response({"article_list": titles})
+        # titles = []
+
+        # for article in articles:
+        #     titles.append(article.title)
+
+        # return Response({"article_list": titles})
 
     def post(self, request):
         user = request.user
         title = request.data.get("title", "")
         contents = request.data.get("content", "")
         categorys = request.data.get("category", [])
+        exposure_start_date = request.data.get("exposure_start_date")
+        exposure_end_date = request.data.get("exposure_end_date")
 
         if len(title) <= 5:
             # 임포트 해주기
@@ -48,6 +64,8 @@ class ArticleView(APIView):
             user=user,
             title=title,
             contents=contents,
+            exposure_start_date=exposure_start_date,
+            exposure_end_date=exposure_end_date,
         )
         article.save()
         article.category.add(*categorys)
